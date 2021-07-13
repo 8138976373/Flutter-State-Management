@@ -1,6 +1,8 @@
 # flutter_state_management
 
-A new Flutter project.
+ Flutter project to learn GetX ,Provider and Bloc.
+ 
+To run app visit main.dart file and uncomment app you need.
 
 ## Getting Started
 
