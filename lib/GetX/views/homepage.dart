@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_management/GetX/controller/getxcontroller.dart';
 import 'package:flutter_state_management/GetX/views/updatedata.dart';
 import 'package:flutter_state_management/GetX/widget/customappbar.dart';
+import 'package:flutter_state_management/GetX/widget/customflottingbutton.dart';
 import 'package:flutter_state_management/GetX/widget/customtext.dart';
 import 'package:get/get.dart';
 
@@ -24,81 +25,18 @@ class ViewDetails extends GetView<DataController> {
         () {
           if (list.isNotEmpty) {
             if (scrollDirection == Axis.horizontal)
-              return verticalListView(context);
+              return horizontalListView(context);
             else
-              return verticalListView1();
+              return verticalListView();
           } else
             return Center(child: Text('Please add data !!!'));
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: new Icon(Icons.group_add),
-                      title: new Text('Add Person'),
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddData(),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: new Icon(Icons.share),
-                      title: new Text('share'),
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ViewDetails(
-                                title: title, scrollDirection: scrollDirection),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: new Icon(Icons.screen_rotation),
-                      title: new Text('Orrientation Change'),
-                      onTap: () {
-                        if (scrollDirection == Axis.horizontal) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ViewDetails(
-                                  title: title, scrollDirection: Axis.vertical),
-                            ),
-                          );
-                        } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ViewDetails(
-                                  title: title,
-                                  scrollDirection: Axis.horizontal),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                );
-              });
-        },
-        child: const Icon(Icons.bookmarks_outlined),
-        backgroundColor: Colors.blueGrey,
-      ),
+      floatingActionButton: FlotingButton(title: title, scrollDirection: scrollDirection),
     );
   }
 
-  ListView verticalListView1() {
+  ListView verticalListView() {
     return ListView.separated(
       separatorBuilder: (context, position) => SizedBox(
         height: 10.0,
@@ -146,7 +84,7 @@ class ViewDetails extends GetView<DataController> {
     );
   }
 
-  Row verticalListView(BuildContext context) {
+  Row horizontalListView(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -169,17 +107,17 @@ class ViewDetails extends GetView<DataController> {
                         children: [
                           CustomText(
                             text: '${list[position].id}',
-                            padding: 10,
+                            padding: 10,maxLines: 2,
                             alignment: MainAxisAlignment.center,
                           ),
                           CustomText(
                             text: '${list[position].name}',
-                            padding: 10,
+                            padding: 10,maxLines: 2,
                             alignment: MainAxisAlignment.center,
                           ),
                           CustomText(
                             text: '${list[position].title}',
-                            padding: 10,
+                            padding: 10,maxLines: 2,
                             alignment: MainAxisAlignment.center,
                           ),
                         ],
@@ -224,3 +162,5 @@ class ViewDetails extends GetView<DataController> {
     );
   }
 }
+
+

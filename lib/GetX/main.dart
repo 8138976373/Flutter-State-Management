@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_management/GetX/views/viewdetails.dart';
+import 'package:flutter_state_management/GetX/views/homepage.dart';
 
 void main() {
   runApp(MyApp());
