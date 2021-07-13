@@ -43,7 +43,7 @@ class UpdateDataPage extends StatelessWidget {
               ),
               CustomButton(
                 onPressed: () {
-
+                  if(namecontroller.text.isNotEmpty && descriptionController.text.isNotEmpty)
                   context.read<HomeCubit>().updateData(  dataModel: Model(
                     name:namecontroller.text, id:id!, title: descriptionController.text,
                   ), position: position);
@@ -51,7 +51,7 @@ class UpdateDataPage extends StatelessWidget {
                 },
                 child: CustomText(
                   alignment: MainAxisAlignment.center,
-                  text: "Add Data",
+                  text: "Update Data",
                   size: 20,
                   textColor: Colors.white,
                 ),

@@ -109,7 +109,6 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, position) {
                 return GestureDetector(
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
                       child: Card(
                         margin: EdgeInsets.all(5),
                         child: Column(

@@ -5,11 +5,12 @@ import 'homestate.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
+  List<Model> list = [];
 
-  List<Model> list = [
-    Model( id:1,name: 'Abcd',title: 'Abdcfhk jhkjjjk'),
-    Model( id:2,name: 'Abcdef',title: 'ghjh ghgjh kj '),
-  ];
+  // List<Model> list = [
+  //   Model( id:1,name: 'Abcd',title: 'Abdcfhk jhkjjjk'),
+  //   Model( id:2,name: 'Abcdef',title: 'ghjh ghgjh kj '),
+  // ];
   fetchData() {
     emit(HomeLoading());
     Future.delayed(Duration(seconds: 1), () => emit(HomeLoaded(list)));

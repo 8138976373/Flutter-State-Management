@@ -1,45 +1,45 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_state_management/GetX/controller/getxcontroller.dart';
-import 'package:flutter_state_management/GetX/views/updatedata.dart';
-import 'package:flutter_state_management/GetX/widget/customappbar.dart';
-import 'package:flutter_state_management/GetX/widget/customflottingbutton.dart';
-import 'package:flutter_state_management/GetX/widget/customtext.dart';
-import 'package:get/get.dart';
+import 'package:flutter_state_management/provider/model/datamodel.dart';
+import 'package:flutter_state_management/provider/notifiers/itemaddnotifier.dart';
+import 'package:flutter_state_management/provider/views/updatedata.dart';
+import 'package:flutter_state_management/provider/widget/customappbar.dart';
+import 'package:flutter_state_management/provider/widget/customflottingbutton.dart';
+import 'package:flutter_state_management/provider/widget/customtext.dart';
+import 'package:provider/provider.dart';
 
-import 'adddetails.dart';
 
-class ViewDetails extends GetView<DataController> {
+class HomePageProvider extends StatelessWidget {
   final String title;
   final Axis scrollDirection;
-  final DataController dataController = Get.put(DataController());
-  List list = Get.find<DataController>().list;
-  ViewDetails({Key? key, required this.title, required this.scrollDirection})
+  HomePageProvider({Key? key, required this.title, required this.scrollDirection})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<Model> list = Provider.of<ItemAddNotifier>(context, listen: false).itemList;
     return Scaffold(
       appBar: CustomAppBar(title: title),
-      body: Obx(
-        () {
+      body:  Consumer<ItemAddNotifier>(
+      builder: (context, itemAddNotifier, _)
+        {
           if (list.isNotEmpty) {
             if (scrollDirection == Axis.horizontal)
-              return horizontalListView(context);
+              return horizontalListView(context,list);
             else
-              return verticalListView();
+              return verticalListView(list);
           } else
             return Center(child: Text('Please add data !!!'));
         },
       ),
-      floatingActionButton: FlotingButton(title: title, scrollDirection: scrollDirection),
+      floatingActionButton: FloatingButton(title: title, scrollDirection: scrollDirection),
     );
   }
 
-  ListView verticalListView() {
+  ListView verticalListView(list) {
     return ListView.separated(
       separatorBuilder: (context, position) => SizedBox(
-        height: 10.0,
+        height: 5.0,
       ),
       scrollDirection: scrollDirection,
       itemCount: list.length,
@@ -61,7 +61,7 @@ class ViewDetails extends GetView<DataController> {
                             leading: new Icon(Icons.delete),
                             title: new Text('Delete'),
                             onTap: () {
-                              controller.deleteData(position);
+                              Provider.of<ItemAddNotifier>(context, listen: false).deleteItem(position);
                               Navigator.pop(context);
                             },
                           ),
@@ -72,7 +72,7 @@ class ViewDetails extends GetView<DataController> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => UpdateData(id: position),
+                                  builder: (context) => UpdateDataPage(position: position),
                                 ),
                               );
                             },
@@ -86,7 +86,7 @@ class ViewDetails extends GetView<DataController> {
     );
   }
 
-  Row horizontalListView(BuildContext context) {
+  Row horizontalListView(BuildContext context,list) {
     return Row(
       children: [
         Expanded(
@@ -102,6 +102,7 @@ class ViewDetails extends GetView<DataController> {
               itemBuilder: (context, position) {
                 return GestureDetector(
                   child: Container(
+                    // width: MediaQuery.of(context).size.width * 0.,
                     child: Card(
                       margin: EdgeInsets.all(5),
                       child: Column(
@@ -135,7 +136,7 @@ class ViewDetails extends GetView<DataController> {
                               leading: new Icon(Icons.delete),
                               title: new Text('Delete'),
                               onTap: () {
-                                controller.deleteData(position);
+                                Provider.of<ItemAddNotifier>(context, listen: false).deleteItem(position);
                                 Navigator.pop(context);
                               },
                             ),
@@ -146,7 +147,7 @@ class ViewDetails extends GetView<DataController> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => UpdateData(id: position),
+                                    builder: (context) => UpdateDataPage(position: position),
                                   ),
                                 );
                               },

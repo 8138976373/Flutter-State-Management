@@ -44,6 +44,7 @@ class UpdateData extends GetView<DataController> {
               ),
               CustomButton(
                 onPressed: () {
+                  if(namecontroller.text.isNotEmpty && descriptionController.text.isNotEmpty)
                   _controller.updateData( Model(
                     name:namecontroller.text, id:_controller.list[id].id, title: descriptionController.text,
                   ),id);
@@ -51,7 +52,7 @@ class UpdateData extends GetView<DataController> {
                 },
                 child: CustomText(
                   alignment: MainAxisAlignment.center,
-                  text: "Add Data",
+                  text: "Update Data",
                   size: 20,
                   textColor: Colors.white,
                 ),
