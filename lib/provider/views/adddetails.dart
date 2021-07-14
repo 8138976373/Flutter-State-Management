@@ -16,12 +16,14 @@ class AddData extends StatelessWidget {
   Widget build(BuildContext context) {
     int index =  Provider.of<ItemAddNotifier>(context, listen: false).itemList.length;
     int id;
+    print(index);
     if(index == 0){
+      print(index);
       id  = 0;
     }else {
       id = Provider
           .of<ItemAddNotifier>(context, listen: false)
-          .itemList[index].id;
+          .itemList[index - 1].id;
     }
     return Scaffold(
         appBar: CustomAppBar(

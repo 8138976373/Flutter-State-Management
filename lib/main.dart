@@ -37,35 +37,35 @@ void main() {
 
 // GetX Main Page
 //
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Demo',
-//       theme: ThemeData(
-//
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: ViewDetails(title :'GetX App',scrollDirection: Axis.vertical),
-//       debugShowCheckedModeBanner: false,
-//     );
-//   }
-// }
-
-// Provider Main Page
-
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ItemAddNotifier>(
-      create: (BuildContext context) {
-        return ItemAddNotifier();
-      },
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: HomePageProvider(scrollDirection: Axis.vertical,title: 'Provider App',)
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+
+        primarySwatch: Colors.blue,
       ),
+      home: ViewDetails(title :'GetX App',scrollDirection: Axis.vertical),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
+
+// Provider Main Page
+
+// class MyApp extends StatelessWidget {
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider<ItemAddNotifier>(
+//       create: (BuildContext context) {
+//         return ItemAddNotifier();
+//       },
+//       child: MaterialApp(
+//         debugShowCheckedModeBanner: false,
+//         home: HomePageProvider(scrollDirection: Axis.vertical,title: 'Provider App',)
+//       ),
+//     );
+//   }
+// }

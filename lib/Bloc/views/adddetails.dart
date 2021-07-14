@@ -22,7 +22,7 @@ class AddDataPage extends StatelessWidget {
     }else {
       id = context
           .read<HomeCubit>()
-          .list[index].id;
+          .list[index - 1].id;
     }
     return Scaffold(
         appBar: CustomAppBar(

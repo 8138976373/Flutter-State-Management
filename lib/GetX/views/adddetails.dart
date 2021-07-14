@@ -23,7 +23,7 @@ class AddData extends GetView<DataController> {
     }else {
       id = Get
           .find<DataController>()
-          .list[index].id;
+          .list[index - 1].id;
     }
     return Scaffold(
         appBar: CustomAppBar(
