@@ -13,7 +13,7 @@ class ViewDetails extends GetView<DataController> {
   final String title;
   final Axis scrollDirection;
   final DataController dataController = Get.put(DataController());
-  List list = Get.find<DataController>().list;
+//  List list = Get.find<DataController>().list;
   ViewDetails({Key? key, required this.title, required this.scrollDirection})
       : super(key: key);
 
@@ -23,7 +23,7 @@ class ViewDetails extends GetView<DataController> {
       appBar: CustomAppBar(title: title),
       body: Obx(
         () {
-          if (list.isNotEmpty) {
+          if ( Get.find<DataController>().list.isNotEmpty) {
             if (scrollDirection == Axis.horizontal)
               return horizontalListView(context);
             else
@@ -42,14 +42,14 @@ class ViewDetails extends GetView<DataController> {
         height: 10.0,
       ),
       scrollDirection: scrollDirection,
-      itemCount: list.length,
+      itemCount:  Get.find<DataController>().list.length,
       shrinkWrap: true,
       itemBuilder: (context, position) {
         return Card(
           child: ListTile(
-              leading: Text('${list[position].id}'),
-              title: Text('${list[position].name}'),
-              subtitle: Text('${list[position].title}'),
+              leading: Text('${ Get.find<DataController>().list[position].id}'),
+              title: Text('${ Get.find<DataController>().list[position].name}'),
+              subtitle: Text('${ Get.find<DataController>().list[position].title}'),
               onTap: () {
                 showModalBottomSheet(
                     context: context,
@@ -107,17 +107,17 @@ class ViewDetails extends GetView<DataController> {
                       child: Column(
                         children: [
                           CustomText(
-                            text: '${list[position].id}',
+                            text: '${ Get.find<DataController>().list[position].id}',
                             padding: 10,maxLines: 2,
                             alignment: MainAxisAlignment.center,
                           ),
                           CustomText(
-                            text: '${list[position].name}',
+                            text: '${ Get.find<DataController>().list[position].name}',
                             padding: 10,maxLines: 2,
                             alignment: MainAxisAlignment.center,
                           ),
                           CustomText(
-                            text: '${list[position].title}',
+                            text: '${ Get.find<DataController>().list[position].title}',
                             padding: 10,maxLines: 2,
                             alignment: MainAxisAlignment.center,
                           ),
